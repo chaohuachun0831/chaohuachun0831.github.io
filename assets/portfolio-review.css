@@ -1,15 +1,16 @@
-/* Temporary review styling for newly added portfolio copy. */
+/* Newly added portfolio copy remains monochrome in the public presentation. */
 .portfolio-update,
 .portfolio-update * {
-  color: #d40000 !important;
-  text-decoration-color: #d40000 !important;
+  color: #000 !important;
+  text-decoration-color: #000 !important;
 }
 
-/* Content revised to match Joshua_Chao_Resume_2.1_s_ATS.pdf. */
+/* Resume-aligned copy is black by default; the page-level hidden mode can
+   reveal its original blue review color. */
 .resume-update,
 .resume-update * {
-  color: #e66f00 !important;
-  text-decoration-color: #e66f00 !important;
+  color: #000 !important;
+  text-decoration-color: #000 !important;
 }
 
 .portfolio-update-note {
@@ -52,6 +53,8 @@ html.is-paint-ready #paint-shield {
 .media-skill-keywords {
   display: flex;
   flex-wrap: wrap;
+  min-width: 0;
+  max-width: 100%;
   gap: 6px 6px;
   margin: var(--media-caption-skill-gap) 0 0 !important;
   padding: 0;
@@ -64,6 +67,8 @@ html.is-paint-ready #paint-shield {
 
 .media-skill-keyword {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
   padding: 4px 7px 2px;
@@ -182,6 +187,15 @@ figure > .media-skill-keywords {
   margin-top: 6px;
 }
 
+/* Let portfolio cards and generated footers shrink inside narrow grid tracks. */
+.section .grid > *,
+.card,
+.card-body,
+.grouped-media-footer {
+  min-width: 0;
+  max-width: 100%;
+}
+
 @media (max-width: 760px) {
   .media-skill-keywords {
     gap: 6px;
@@ -212,5 +226,15 @@ figure > .media-skill-keywords {
   .business-card-grid:not(.is-layout-grid) > .card + .card,
   .meeting-grid:not(.is-layout-grid) > .card + .card {
     margin-top: var(--grouped-gallery-media-gap) !important;
+  }
+}
+
+/* Long skill labels must remain inside the content column on compact phones
+   and when the browser's text-size accessibility setting is increased. */
+@media (max-width: 460px) {
+  .media-skill-keyword {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.15;
   }
 }

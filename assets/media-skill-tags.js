@@ -1,29 +1,53 @@
 (() => {
   "use strict";
 
-  const pageProfiles = {
-    kktv: ["Creative Direction", "Integrated Brand Systems", "Campaign Development"],
-    kkfarm: ["Creative Direction", "Art & Visual Direction", "Campaign Development"],
-    "kkbox-group": ["Creative Direction", "Corporate Storytelling", "Campaign Development"],
-    kkcompany: ["Creative Direction", "Brand Strategy", "Corporate Storytelling", "Integrated Brand Systems"],
-    kkculture: ["Creative Direction", "Art & Visual Direction", "Integrated Brand Systems"],
-    "nvidia-sccd": ["Creative Direction", "Generative AI Creative Workflows", "Motion & Video Direction"],
-    ace: ["Creative Direction", "Generative AI Creative Workflows", "Internal Training & Mentoring"],
-    "3d": ["Creative Direction", "Art & Visual Direction", "3D Creative Art Direction"]
-  };
+  // Section-level profiles keep each skill row tied to the work directly above it.
+  // They intentionally use the nearest preceding heading instead of the page overview,
+  // so unrelated projects on the same page do not inherit one another's specialties.
+  const sectionProfiles = [
+    { pattern: /KKTV Television Commercials/i, skills: ["Integrated Campaigns", "Film Direction", "Storyboarding", "Motion & Video Direction", "Consumer Marketing"] },
+    { pattern: /KKTV Landing Page/i, skills: ["UI\/UX & Web Direction", "Key Visual Development", "Digital Campaigns", "Brand Identity Systems"] },
+    { pattern: /KKTV Drama Trailers/i, skills: ["Trailer Direction", "Video Editing", "Motion & Video Direction", "Content Marketing"] },
+    { pattern: /KKTV Prepaid Cards/i, skills: ["Retail Design", "Print Production", "Brand Applications", "Consumer Marketing"] },
+    { pattern: /KKTV Guidelines & Materials/i, skills: ["Brand Guidelines", "Brand Governance", "Motion Identity", "End-to-End Production"] },
 
-  const contextualRules = [
-    { pattern: /website|landing|homepage|interface|\bui\b|ui\/ux|mobile|tablet|app |app$|screen|web design/i, skills: ["UI/UX & Web Direction"] },
-    { pattern: /video|motion|animation|showreel|trailer|tvc|film|episode|music video|\bmv\b|lyric/i, skills: ["Motion & Video Direction"] },
-    { pattern: /campaign|launch|promotion|advertising|social|recruitment|recruiting/i, skills: ["Campaign Development"] },
-    { pattern: /corporate|career|worldview|shareholder|company narrative|employer/i, skills: ["Corporate Storytelling"] },
-    { pattern: /identity|brand book|brand system|guideline|logo|logotype|visual system/i, skills: ["Integrated Brand Systems", "Brand Strategy"] },
-    { pattern: /event|concert|live design|office|retail|prepaid|merch|business card|exhibition|press conference/i, skills: ["Event & Retail Design"] },
-    { pattern: /photography book|campaign photography|portrait photography/i, skills: ["Photography Direction"] },
-    { pattern: /3d|probe|turbo snail|game|environment|character/i, skills: ["3D Creative Art Direction"] },
-    { pattern: /generative ai|gen-ai|project nv|street signs|runway|ai music/i, skills: ["Generative AI Creative Workflows"] },
-    { pattern: /uwc|isak|japan|international|apac/i, skills: ["APAC & International Collaboration", "Global-to-Local Adaptation"] },
-    { pattern: /training|workshop|course|education|teacher|student|leadership/i, skills: ["Internal Training & Mentoring"] }
+    { pattern: /^Music Videos & jutv$/i, skills: ["Music Video Direction", "Artist Branding", "Storyboarding", "Video Production", "Motion & Video Direction"] },
+    { pattern: /Anniversary Photography Book/i, skills: ["Photography Direction", "Editorial Design", "Art Direction", "Print Production"] },
+    { pattern: /Project SUI Cover Arts/i, skills: ["Album Artwork", "Key Visual Development", "Artist Branding", "Art Direction"] },
+    { pattern: /Project SUI Music Videos/i, skills: ["Music Video Direction", "Artist Branding", "Storyboarding", "Video Production", "Motion & Video Direction"] },
+
+    { pattern: /KKBOX Group Image & Recruitment/i, skills: ["Employer Branding", "Recruitment Campaign", "Corporate Storytelling", "Film Direction", "Integrated Campaigns"] },
+    { pattern: /KKBOX 2020 Brand Book & Application/i, skills: ["Brand Identity Systems", "Brand Guidelines", "Editorial Design", "Art Direction"] },
+    { pattern: /KKStream \/ BlendVision/i, skills: ["3D Creative Direction", "Enterprise Storytelling", "Product Visualization", "Motion & Video Direction", "B2B Brand Communication"] },
+
+    { pattern: /^KKCompany \(2021-2022\)/i, skills: ["Corporate Storytelling", "Brand Strategy", "Motion & Video Direction", "Executive Communication"] },
+    { pattern: /Process Sketches & Concept Development/i, skills: ["Logo Design", "Brand Identity Systems", "Concept Development", "Color System"] },
+    { pattern: /KKCompany Career Website & Search Interface Design/i, skills: ["UI\/UX & Web Direction", "Interaction Design", "Information Architecture", "Employer Branding"] },
+
+    { pattern: /Connected Dots.*Motion System/i, skills: ["Motion Identity", "Brand Identity Systems", "Motion Direction", "Concept Development"] },
+    { pattern: /Business Card Unified Design System/i, skills: ["Visual Identity", "Print Design", "Production Design", "Brand System Rollout"] },
+    { pattern: /^KKCulture 2023 Website$/i, skills: ["UI\/UX & Web Direction", "Digital Brand System", "Motion Prototyping", "Responsive Design"] },
+    { pattern: /Intro Deck Animation Design/i, skills: ["Presentation Design", "Motion Graphics", "Executive Communication", "Visual Storytelling"] },
+    { pattern: /You Create.*Office Visual System/i, skills: ["Environmental Graphics", "Workplace Branding", "Spatial Applications", "Art Direction"] },
+    { pattern: /KKCulture 2024 Website Redesign/i, skills: ["UI\/UX & Web Direction", "Digital Brand System", "Interaction Design", "Responsive Design"] },
+
+    { pattern: /Project NV Computex Showreel/i, skills: ["Generative AI Creative Workflows", "AI Image Development", "Storyboarding", "Video Editing", "Creative Direction"] },
+    { pattern: /Project NV Meetings with Alex Ju/i, skills: ["Creative Collaboration", "Concept Development", "AI Workflow Planning", "Cross-Functional Leadership"] },
+    { pattern: /Kimberley.*Street Signs.*Generative AI MV/i, skills: ["Generative AI Creative Workflows", "Music Video Direction", "AI Image Development", "Video Editing", "Artist Branding"] },
+
+    { pattern: /Applied Creativity Engine/i, skills: ["Curriculum Design", "Workshop Facilitation", "AI-Assisted Ideation", "Creative Education"] }
+  ];
+
+  const itemRules = [
+    { pattern: /Turn Up Festival Merch/i, replace: ["Merchandise Design", "Event & Retail Design", "Brand Identity Systems", "Production Design"] },
+    { pattern: /Feature Intro Video/i, replace: ["Product Storytelling", "Motion Design", "Brand Identity Systems", "Motion & Video Direction"] },
+    { pattern: /Guidelines & Materials Open Database/i, replace: ["Digital Asset Curation", "UI\/UX & Web Direction", "Brand Guidelines", "Brand Governance"] },
+    { pattern: /You Create.*Interface/i, skills: ["Interface Design"] },
+    { pattern: /InCG Issue/i, replace: ["Editorial Communication", "Media Storytelling", "Generative AI Case Study", "Artist Branding"] },
+    { pattern: /UWC ISAK JAPAN/i, skills: ["APAC Collaboration", "English-Language Facilitation"] },
+    { pattern: /Chunghwa Telecom/i, skills: ["Corporate Training"] },
+    { pattern: /Gallup|WAVE Brand Leadership/i, skills: ["Leadership Development", "Executive Training"] },
+    { pattern: /Creative Confidence AI Summer Lab|Junyi|Sharestart/i, skills: ["Design Thinking", "Creative Facilitation"] }
   ];
 
   const pageKey = document.querySelector(".content-panel")?.dataset.panel
@@ -48,22 +72,40 @@
     return group;
   }
 
+  const pageHeadings = [...document.querySelectorAll(".content-panel h2")];
+
+  function nearestPrecedingHeading(element) {
+    let heading = null;
+    pageHeadings.forEach((candidate) => {
+      if (candidate.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        heading = candidate;
+      }
+    });
+    return heading?.textContent?.trim() || "";
+  }
+
   function skillsFor(element, media) {
-    const section = element.closest("section");
-    const context = [
+    const itemContext = [
       element.dataset?.title,
       element.dataset?.id,
       element.getAttribute("aria-label"),
-      element.querySelector("h3, figcaption")?.textContent,
-      section?.querySelector("h2")?.textContent
+      element.querySelector("h3, figcaption")?.textContent
     ].filter(Boolean).join(" ");
+    const headingContext = nearestPrecedingHeading(element);
+    const sectionProfile = sectionProfiles.find((profile) => profile.pattern.test(headingContext));
+    let skills = sectionProfile ? [...sectionProfile.skills] : [];
 
-    const skills = [...(pageProfiles[pageKey] || ["Creative Direction", "Art & Visual Direction"])]
-    if (media?.matches("video, iframe")) skills.push("Motion & Video Direction");
-    if (media?.matches("img")) skills.push("Art & Visual Direction");
-    contextualRules.forEach((rule) => {
-      if (rule.pattern.test(context)) skills.push(...rule.skills);
+    itemRules.forEach((rule) => {
+      if (!rule.pattern.test(itemContext)) return;
+      if (rule.replace) skills = [...rule.replace];
+      else skills.push(...rule.skills);
     });
+
+    if (!skills.length) {
+      skills = ["Creative Direction"];
+      if (media?.matches("video, iframe")) skills.push("Motion & Video Direction");
+      if (media?.matches("img")) skills.push("Art Direction");
+    }
     return uniqueSkills(skills);
   }
 
