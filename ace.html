@@ -652,7 +652,7 @@
     }
 
     .overview-title-subtitle {
-      margin-top: calc(var(--heading-content-gap) + 10.6px);
+      margin-top: calc((var(--heading-content-gap) + 10.6px) / 2);
       font-size: 0.78em;
       line-height: 1.32;
     }
@@ -2777,6 +2777,18 @@
       letter-spacing: 0;
     }
 
+    .project-overview-intro {
+      margin: calc(var(--heading-content-gap) / 4) 0 0;
+      color: #000;
+      font-size: var(--article-body-font-size);
+      line-height: 1.42;
+      letter-spacing: 0;
+    }
+
+    .project-overview-intro + .project-overview-card {
+      margin-top: var(--section-gap);
+    }
+
     .project-overview-card + .essay {
       margin-top: 0;
     }
@@ -2860,12 +2872,7 @@
     <!-- CONTENT SECTION: one major vertical block with a heading and either project metadata, media, or prose. Keep section spacing consistent through the shared CSS variables. -->
     <section class="section" aria-labelledby="ace-title">
           <h2 id="ace-title"><span class="overview-title-line resume-update">Applied Creativity Engine (Aug 2023-Present)</span> <span class="overview-title-subtitle resume-update">Human-Centered Creativity, Design Thinking, AI-Assisted Ideation, and Entrepreneurial Leadership</span></h2>
-      <dl class="project-top-context resume-update">
-        <div class="project-overview-item">
-          <dt>International Collaboration</dt>
-          <dd>Established an ongoing English-language collaboration with UWC ISAK Japan and developed workshops, online courses, printed thinking tools, showcases, and AI-assisted ideation and pitching exercises that translated emerging technologies into practical creative outcomes.</dd>
-        </div>
-      </dl>
+      <p class="project-overview-intro resume-update">Established an ongoing English-language collaboration with UWC ISAK Japan and developed workshops, online courses, printed thinking tools, showcases, and AI-assisted ideation and pitching exercises that translated emerging technologies into practical creative outcomes.</p>
       <!-- PROJECT OVERVIEW CARD: six metadata fields shown near the top of each case-study page. -->
       <div class="project-overview-card revision-highlight" aria-label="ACE Project Overview">
         <!-- DEFINITION LIST: dt labels are the bold field names; dd values are compact metadata copy. -->

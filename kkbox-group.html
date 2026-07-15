@@ -656,7 +656,7 @@
     }
 
     .overview-title-subtitle {
-      margin-top: calc(var(--heading-content-gap) + 10.6px);
+      margin-top: calc((var(--heading-content-gap) + 10.6px) / 2);
       font-size: 0.78em;
       line-height: 1.32;
     }
@@ -2879,6 +2879,18 @@
       letter-spacing: 0;
     }
 
+    .project-overview-intro {
+      margin: calc(var(--heading-content-gap) / 4) 0 0;
+      color: #000;
+      font-size: var(--article-body-font-size);
+      line-height: 1.42;
+      letter-spacing: 0;
+    }
+
+    .project-overview-intro + .project-overview-card {
+      margin-top: var(--section-gap);
+    }
+
     .project-overview-card + .essay {
       margin-top: 0;
     }
@@ -2962,12 +2974,7 @@
     <!-- CONTENT SECTION: one major vertical block with a heading and either project metadata, media, or prose. Keep section spacing consistent through the shared CSS variables. -->
     <section class="section" aria-labelledby="kkbox-group-recruit-title">
             <h2 id="kkbox-group-recruit-title"><span class="overview-title-line">KKBOX Group (2018-2021)</span> <span class="overview-title-subtitle resume-update">Corporate and Recruitment Campaigns with BlendVision Enterprise Storytelling</span></h2>
-      <dl class="project-top-context resume-update">
-        <div class="project-overview-item">
-          <dt>Creative Scope</dt>
-          <dd>Led hands-on art direction and creative leadership for KKBOX Group corporate and recruitment initiatives, translating business priorities, audience insights, and employer-brand strategy into campaign narratives, key visuals, typography, motion principles, films, social content, recruiting materials, and Figma-based career website experiences.</dd>
-        </div>
-      </dl>
+      <p class="project-overview-intro resume-update">Led hands-on art direction and creative leadership for KKBOX Group corporate and recruitment initiatives, translating business priorities, audience insights, and employer-brand strategy into campaign narratives, key visuals, typography, motion principles, films, social content, recruiting materials, and Figma-based career website experiences.</p>
       <!-- PROJECT OVERVIEW CARD: six metadata fields shown near the top of each case-study page. -->
       <div class="project-overview-card revision-highlight" aria-label="KKBOX Group Project Overview">
         <!-- DEFINITION LIST: dt labels are the bold field names; dd values are compact metadata copy. -->

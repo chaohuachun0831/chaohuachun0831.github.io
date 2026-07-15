@@ -651,7 +651,7 @@
     }
 
     .overview-title-subtitle {
-      margin-top: calc(var(--heading-content-gap) + 10.6px);
+      margin-top: calc((var(--heading-content-gap) + 10.6px) / 2);
       font-size: 0.78em;
       line-height: 1.32;
     }
@@ -2891,6 +2891,18 @@
       letter-spacing: 0;
     }
 
+    .project-overview-intro {
+      margin: calc(var(--heading-content-gap) / 4) 0 0;
+      color: #000;
+      font-size: var(--article-body-font-size);
+      line-height: 1.42;
+      letter-spacing: 0;
+    }
+
+    .project-overview-intro + .project-overview-card {
+      margin-top: var(--section-gap);
+    }
+
     .project-overview-card + .essay {
       margin-top: 0;
     }
@@ -2974,12 +2986,7 @@
     <!-- CONTENT SECTION: one major vertical block with a heading and either project metadata, media, or prose. Keep section spacing consistent through the shared CSS variables. -->
     <section class="section" aria-labelledby="kkculture-title">
           <h2 id="kkculture-title"><span class="overview-title-line">KKCulture (2022-2025)</span> <span class="overview-title-subtitle resume-update">Identity System Across Digital, Physical, Event, and Corporate Applications</span></h2>
-      <dl class="project-top-context resume-update">
-        <div class="project-overview-item">
-          <dt>System Application</dt>
-          <dd>Directed the KKCulture identity system across digital, motion, video, websites, UI/UX, event environments, merchandise, workplace applications, presentations, and corporate communications, translating brand strategy into scalable typography, color, imagery, motion, and production guidelines.</dd>
-        </div>
-      </dl>
+      <p class="project-overview-intro resume-update">Directed the KKCulture identity system across digital, motion, video, websites, UI/UX, event environments, merchandise, workplace applications, presentations, and corporate communications, translating brand strategy into scalable typography, color, imagery, motion, and production guidelines.</p>
       <!-- PROJECT OVERVIEW CARD: six metadata fields shown near the top of each case-study page. -->
       <div class="project-overview-card revision-highlight" aria-label="KKCulture Project Overview">
         <!-- DEFINITION LIST: dt labels are the bold field names; dd values are compact metadata copy. -->

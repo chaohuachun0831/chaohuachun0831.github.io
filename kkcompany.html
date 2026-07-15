@@ -652,7 +652,7 @@
     }
 
     .overview-title-subtitle {
-      margin-top: calc(var(--heading-content-gap) + 10.6px);
+      margin-top: calc((var(--heading-content-gap) + 10.6px) / 2);
       font-size: 0.78em;
       line-height: 1.32;
     }
@@ -2829,6 +2829,18 @@
       letter-spacing: 0;
     }
 
+    .project-overview-intro {
+      margin: calc(var(--heading-content-gap) / 4) 0 0;
+      color: #000;
+      font-size: var(--article-body-font-size);
+      line-height: 1.42;
+      letter-spacing: 0;
+    }
+
+    .project-overview-intro + .project-overview-card {
+      margin-top: var(--section-gap);
+    }
+
     .project-overview-card + .essay {
       margin-top: 0;
     }
@@ -2912,12 +2924,7 @@
     <!-- CONTENT SECTION: one major vertical block with a heading and either project metadata, media, or prose. Keep section spacing consistent through the shared CSS variables. -->
     <section class="section" aria-labelledby="kkcompany-worldview-title">
           <h2 id="kkcompany-worldview-title"><span class="overview-title-line">KKCompany (2021-2022)</span> <span class="overview-title-subtitle resume-update">Worldview Across Integrated Brand Systems and Corporate Storytelling</span></h2>
-      <dl class="project-top-context resume-update">
-        <div class="project-overview-item">
-          <dt>Creative Scope</dt>
-          <dd>Directed KKCompany corporate identity, worldview, and employer branding across identity systems, typography, image direction, digital products, Figma-based UI/UX, motion, video, public and career websites, executive presentations, internal communication, and shareholder-facing materials.</dd>
-        </div>
-      </dl>
+      <p class="project-overview-intro resume-update">Directed KKCompany corporate identity, worldview, and employer branding across identity systems, typography, image direction, digital products, Figma-based UI/UX, motion, video, public and career websites, executive presentations, internal communication, and shareholder-facing materials.</p>
       <!-- PROJECT OVERVIEW CARD: six metadata fields shown near the top of each case-study page. -->
       <div class="project-overview-card revision-highlight" aria-label="KKCompany Project Overview">
         <!-- DEFINITION LIST: dt labels are the bold field names; dd values are compact metadata copy. -->
